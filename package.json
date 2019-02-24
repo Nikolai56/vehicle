@@ -10,10 +10,10 @@
     "url": "https://github.com/Nikolai56/vehicle.git"
   },
   "dependencies": {
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
     "react-redux": "^6.0.0",
-    "react-scripts": "2.1.3",
+    "react-scripts": "2.1.5",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.1"
   },
