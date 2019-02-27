@@ -1,2 +1,5 @@
 /build
 /node_modules
+
+/src/serviceWorker.js
+/src/App.test.js

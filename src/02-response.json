@@ -1,0 +1,34 @@
+{
+  "status": "ok",
+  "data": {
+    "begin_ts": 1540425600,
+    "end_ts": 1540511999,
+    "components": [
+      {
+        "title": "Right Rear Turn Signal",
+        "subsystem_id": 1,
+        "states": [
+          {
+            "level": "Fail",
+            "appear_ts": 1540425000,
+            "descriptions": "Front Motor Inverter power supply failure"
+          },
+          {
+            "level": "Warning",
+            "appear_ts": 1540456901
+          }
+        ]
+      },
+      {
+        "title": "Steering & Brakes",
+        "subsystem_id": 5,
+        "states": [
+          {
+            "level": "Ok",
+            "appear_ts": 1540456901
+          }
+        ]
+      }
+    ]
+  }
+}
