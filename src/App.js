@@ -27,6 +27,9 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <div>
+                    <button>Te</button>
+                </div>
                 <Chart
                     data={data}
                     baseData={baseData}
