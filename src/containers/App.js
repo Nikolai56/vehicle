@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Chart from '../components/Chart';
+import Controls from '../components/Controls';
 import { fetchSignals } from '../actions';
 import '../styles/App.css';
 
@@ -20,9 +21,11 @@ const barsData = [
     },
 ];
 
-type Props = {
-    data: Object,
-    dispatch: (action: () => any) => void,
+export type Props = {
+    filteredIds: Array<number>,
+    signals: Object,
+    components: Array<Object>,
+    dispatch: (args: any) => void,
     isLoading: boolean,
     error: 'string',
 };
@@ -38,17 +41,18 @@ class App extends PureComponent<Props> {
     };
 
     render() {
-        const { data, isLoading } = this.props;
+        const { signals, isLoading, filteredIds } = this.props;
 
         if (isLoading) return <div>Loading</div>;
 
         return (
             <div className="App">
-                <div>
-                    <button>Steering & Brakes</button>
-                </div>
+                <Controls
+                    components={signals.components}
+                />
                 <Chart
-                    data={data}
+                    filteredIds={filteredIds}
+                    data={signals}
                     // baseData={data}
                     height={500}
                     width={1280}
@@ -60,8 +64,9 @@ class App extends PureComponent<Props> {
 }
 
 const mapStateToProps = state => ({
+    filteredIds: state.filteredIds,
     isLoading: state.isLoading,
-    data: state.data,
+    signals: state.signals,
     error: state.error,
 });
 

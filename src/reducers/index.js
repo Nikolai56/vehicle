@@ -1,12 +1,21 @@
-import { ActionTypes } from '../actions';
+// @flow
+import { type Action, ActionTypes } from '../actions';
 
-const initialState = {
-    data: undefined,
-    isLoading: true,
-    error: null,
+type State = {
+    filteredIds: Array<number>,
+    signals: Object,
+    isLoading: boolean,
+    error: string,
 };
 
-const reducer = (state = initialState, action) => {
+const initialState: State = {
+    filteredIds: [],
+    signals: undefined,
+    isLoading: true,
+    error: '',
+};
+
+const reducer = (state: State = initialState, action: Action) => {
     switch (action.type) {
     case ActionTypes.REQUESTED_SIGNALS:
         return {
@@ -17,7 +26,7 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.REQUESTED_SIGNALS_SUCCEEDED:
         return {
             ...state,
-            data: action.data,
+            signals: action.data,
             isLoading: false,
         };
     case ActionTypes.REQUESTED_SIGNALS_FAILED:
@@ -25,6 +34,11 @@ const reducer = (state = initialState, action) => {
             ...state,
             isLoading: false,
             error: action.error,
+        };
+    case ActionTypes.UPDATE_FILTERS:
+        return {
+            ...state,
+            filteredIds: action.filteredIds,
         };
     default:
         return state;

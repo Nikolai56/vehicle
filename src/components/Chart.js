@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as d3 from 'd3';
 
-class BarChartV3 extends React.Component {
+class Chart extends React.Component {
 
     scaleColor = d3.scaleSequential(d3.interpolateViridis);
     scaleHeight = d3.scaleLinear();
@@ -18,7 +18,7 @@ class BarChartV3 extends React.Component {
     }
 
     componentDidUpdate() {
-        // this.updateChart();
+        this.updateChart();
     }
 
     componentWillUnmount() {
@@ -34,12 +34,25 @@ class BarChartV3 extends React.Component {
     };
 
     updateChart() {
+        console.log('updateChart');
         this.updateScales();
-        const { animDuration, data: { components }, height, width } = this.props;
+        const { animDuration, data: { components }, filteredIds, height, width } = this.props;
+        const filteredComponents = components
+            .filter(component => !filteredIds.includes(component.subsystem_id));
+        console.log('filteredComponents', filteredComponents);
 
-        d3.select(this.viz)
-            .selectAll('.bar')
-            .data(components)
+        /*        d3.select(this.viz)
+            .selectAll('.line')
+            .data(filteredComponents);*/
+
+        const line = d3.select(this.viz)
+            .selectAll('.line')
+            .data(filteredComponents);
+
+        line
+            .exit().remove(); //remove unneeded lines
+
+        line
             .enter()
             .append('rect')
             .transition().duration(animDuration)
@@ -50,9 +63,12 @@ class BarChartV3 extends React.Component {
             .style('fill',  '#35b485')
             .attr('class', 'line');
 
+
+
+
         const groupEnter = d3.select(this.viz)
             .selectAll('.group')
-            .data(components)
+            .data(filteredComponents)
             .enter()
             .append('g')
             .attr('class', 'group')
@@ -165,11 +181,11 @@ class BarChartV3 extends React.Component {
     }
 }
 
-BarChartV3.defaultProps = {
+Chart.defaultProps = {
     animDuration: 600
 };
 
-BarChartV3.propTypes = {
+Chart.propTypes = {
     data: PropTypes.array.isRequired,
     baseData: PropTypes.object.isRequired,
     width: PropTypes.number.isRequired,
@@ -178,4 +194,4 @@ BarChartV3.propTypes = {
     animDuration: PropTypes.number
 };
 
-export default BarChartV3;
+export default Chart;
