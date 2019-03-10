@@ -1,8 +1,9 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { updateFilters } from '../actions';
-import { type Props } from '../containers/App';
+import { updateFilters } from '../../actions';
+import { type Props } from '../../containers/App';
+import './index.scss';
 
 class Controls extends PureComponent<Props> {
 
@@ -25,10 +26,11 @@ class Controls extends PureComponent<Props> {
         const { components } = this.props;
 
         return (
-            <div>
+            <div className="controls-block">
                 {components.map(component => (
                     <button
                         key={component.subsystem_id}
+                        className="controls-block__btn"
                         onClick={() => this.handleFetchRates(component.subsystem_id)}
                     >
                         {component.title}

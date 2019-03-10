@@ -55,7 +55,7 @@ class Chart extends React.Component {
         line
             .enter()
             .append('rect')
-            .transition().duration(animDuration)
+            // .transition().duration(animDuration)
             .attr('y', (d, i) => ( this.scaleHeight(i) ))
             .attr('height', 3 )
             .attr('x', 250 )
@@ -72,7 +72,7 @@ class Chart extends React.Component {
             .enter()
             .append('g')
             .attr('class', 'group')
-            .attr('transform', 'translate(' + 20 + ',' + 40 + ')')
+            .attr('transform', (d, i) =>`translate(40, ${this.scaleHeight(i)})`)
             .call(d3.drag()
                 .on('start', this.dragStarted)
                 .on('drag', this.dragged)
@@ -90,9 +90,10 @@ class Chart extends React.Component {
         groupEnter
             .append('text')
             .text(d => d.title)
-            .attr('class', 'label')
-            .attr('x', (d) => ( this.scaleWidth(d.title) ) )
-            .attr('y', (d, i) => ( this.scaleHeight(i) ));
+            .attr('class', 'label');
+            // .attr('x', (d) => ( this.scaleWidth(d.title) ) )
+            // .attr('y', (d, i) => ( this.scaleHeight(i) ));
+
         // .append("text")
         //   .text(d => d.title)
         //   .attr('class', 'label')
@@ -141,7 +142,7 @@ class Chart extends React.Component {
         // d.fy = d3.event.y;
         d3.select(this)
             // .attr('y', d3.event.y );
-            .attr('transform', 'translate(' + 20 + ',' + d3.event.y + ')');
+            .attr('transform', `translate(40, ${d3.event.y})`);
     }
 
     dragEnded(){

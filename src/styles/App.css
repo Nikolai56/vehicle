@@ -20,5 +20,7 @@ svg {
 }
 
 .label {
-
+    font-size: 13px;
+    fill: white;
+    user-select: none;
 }
